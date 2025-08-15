@@ -73,6 +73,9 @@ public class SudokuService {
             throw new InvalidMoveException("Posição já preenchida");
         }
 
+        if(!(number >= 1 && number <=9)){
+            throw new InvalidMoveException("Valor deve ser entre 1 e 9");
+        }
 
         this.sudoku.getSudoku().get(pos[0]).get(pos[1]).setValueActual(number);
 
