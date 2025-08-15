@@ -41,7 +41,6 @@ public class SudokuSolver {
 
     private int countSolution(int[][] board, int count) {
         // Se já achamos mais de uma solução
-        System.out.println("countSolution: "+count);
         if (count > 1) return count;
 
         for (int row = 0; row < SIZE; row++) {

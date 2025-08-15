@@ -6,11 +6,12 @@ public class Space {
     private final int valueExpected;
     private Integer valueActual;
 
+
     public Space(boolean fixed, int valueExpected) {
         this.fixed = fixed;
         this.valueExpected = valueExpected;
         if (fixed) {
-            this.valueActual = null;
+            this.valueActual = valueExpected;
         }
     }
 

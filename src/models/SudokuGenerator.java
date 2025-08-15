@@ -7,18 +7,50 @@ public class SudokuGenerator {
     private Random rand = new Random();
     private SudokuSolver solver = new SudokuSolver();
 
-    public void generateSudoku(int clues) {
+    public Sudoku generateSudoku(int clues) {
 
         while(true) {
 
-            int[][] sudoku = this.generateBoard();
+            int[][] board = this.generateBoard();
 
-            int[][] puzzle = this.generatePuzzle(sudoku, clues);
+            int[][] puzzle = this.generatePuzzle(board, clues);
 
             int[][] copy = puzzle;
             if(solver.hasUniqueSolution(copy)) {
 
-                break;
+                Sudoku sudoku = new Sudoku();
+                List<List<Space>> listSpaces = new ArrayList<>();
+                for (int i = 0; i < 9; i++) {
+                    listSpaces.add(new ArrayList<>());
+                }
+
+                for (int i =0; i< 9; i++) {
+                    List<Space> spaces = listSpaces.get(i);
+                    for(int j = 0; j < 9; j++) {
+                        if(puzzle[i][j] != 0){
+                            Space space = new Space(true, board[i][j]);
+                            spaces.add(space);
+                        }else{
+                            Space space = new Space(false, board[i][j]);
+                            space.setValueActual(null);
+                            spaces.add(space);
+                        }
+                    }
+                }
+
+                sudoku.setSudoku(listSpaces);
+                // Caso queria ver a tabela preenchida para testar
+                /*
+                System.out.println("================== Colar ==================");
+                sudoku.getSudoku().forEach(spaces -> {
+                    System.out.print("| ");
+                    spaces.forEach(space -> {
+                        System.out.print(space.getValueExpected() + " |");
+                    });
+                    System.out.println();
+                }); */
+
+                return sudoku;
             }
 
         }
